@@ -59,25 +59,25 @@ public class PublicKeyCredentialParameters {
   }
 
   /**
-   * Algorithm {@link COSEAlgorithmIdentifier#DILITHIUM2} and type {@link
+   * Algorithm {@link COSEAlgorithmIdentifier#MLDSA44} and type {@link
    * PublicKeyCredentialType#PUBLIC_KEY}.
    */
-  public static final PublicKeyCredentialParameters DILITHIUM2 =
-      builder().alg(COSEAlgorithmIdentifier.DILITHIUM2).build();
+  public static final PublicKeyCredentialParameters MLDSA44 =
+      builder().alg(COSEAlgorithmIdentifier.MLDSA44).build();
 
   /**
-   * Algorithm {@link COSEAlgorithmIdentifier#DILITHIUM3} and type {@link
+   * Algorithm {@link COSEAlgorithmIdentifier#MLDSA65} and type {@link
    * PublicKeyCredentialType#PUBLIC_KEY}.
    */
-  public static final PublicKeyCredentialParameters DILITHIUM3 =
-      builder().alg(COSEAlgorithmIdentifier.DILITHIUM3).build();
+  public static final PublicKeyCredentialParameters MLDSA65 =
+      builder().alg(COSEAlgorithmIdentifier.MLDSA65).build();
 
   /**
-   * Algorithm {@link COSEAlgorithmIdentifier#DILITHIUM5} and type {@link
+   * Algorithm {@link COSEAlgorithmIdentifier#MLDSA87} and type {@link
    * PublicKeyCredentialType#PUBLIC_KEY}.
    */
-  public static final PublicKeyCredentialParameters DILITHIUM5 =
-      builder().alg(COSEAlgorithmIdentifier.DILITHIUM5).build();
+  public static final PublicKeyCredentialParameters MLDSA87 =
+      builder().alg(COSEAlgorithmIdentifier.MLDSA87).build();
 
   /**
    * Algorithm {@link COSEAlgorithmIdentifier#EdDSA} and type {@link

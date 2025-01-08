@@ -50,10 +50,8 @@ import java.security.Security;
 public class EmbeddedServer {
 
   public static void main(String[] args) throws Exception {
-    // Add BouncyCastleProvider for Dilithium3.
-    // For compatibility with the demo, we force an
-    // old version [1.72,1.77) so that the pre-standard
-    // version is used.
+    // Add BouncyCastleProvider for ML-DSA.
+    // Version must be >= 1.79.
     Security.addProvider(new BouncyCastleProvider());
     final int port = Config.getPort();
 

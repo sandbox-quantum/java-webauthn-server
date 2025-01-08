@@ -371,16 +371,16 @@ public class PublicKeyCredentialCreationOptions {
                 param -> {
                   try {
                     switch (param.getAlg()) {
-                      case DILITHIUM2:
-                        KeyFactory.getInstance("DILITHIUM2");
+                      case MLDSA44:
+                        KeyFactory.getInstance("ML-DSA-44");
                         break;
 
-                      case DILITHIUM3:
-                        KeyFactory.getInstance("DILITHIUM3");
+                      case MLDSA65:
+                        KeyFactory.getInstance("ML-DSA-65");
                         break;
 
-                      case DILITHIUM5:
-                        KeyFactory.getInstance("DILITHIUM5");
+                      case MLDSA87:
+                        KeyFactory.getInstance("ML-DSA-87");
                         break;
 
                       case EdDSA:
@@ -413,16 +413,16 @@ public class PublicKeyCredentialCreationOptions {
 
                   try {
                     switch (param.getAlg()) {
-                      case DILITHIUM2:
-                        Signature.getInstance("DILITHIUM2");
+                      case MLDSA44:
+                        Signature.getInstance("ML-DSA-44");
                         break;
 
-                      case DILITHIUM3:
-                        Signature.getInstance("DILITHIUM3");
+                      case MLDSA65:
+                        Signature.getInstance("ML-DSA-65");
                         break;
 
-                      case DILITHIUM5:
-                        Signature.getInstance("DILITHIUM5");
+                      case MLDSA87:
+                        Signature.getInstance("ML-DSA-87");
                         break;
 
                       case EdDSA:

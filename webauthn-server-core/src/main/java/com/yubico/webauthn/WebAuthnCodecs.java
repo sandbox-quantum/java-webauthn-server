@@ -30,8 +30,8 @@ import com.google.common.primitives.Bytes;
 import com.upokecenter.cbor.CBORObject;
 import com.yubico.webauthn.data.ByteArray;
 import com.yubico.webauthn.data.COSEAlgorithmIdentifier;
-import org.bouncycastle.pqc.crypto.crystals.dilithium.DilithiumParameters;
-import org.bouncycastle.pqc.crypto.crystals.dilithium.DilithiumPublicKeyParameters;
+import org.bouncycastle.pqc.crypto.mldsa.MLDSAParameters;
+import org.bouncycastle.pqc.crypto.mldsa.MLDSAPublicKeyParameters;
 import org.bouncycastle.pqc.jcajce.provider.util.KeyUtil;
 
 import java.io.IOException;
@@ -138,32 +138,32 @@ final class WebAuthnCodecs {
         // COSE-JAVA supports RSA in v1.1.0 but not in v1.0.0
         return importCoseRsaPublicKey(cose);
       case 7:
-        return importCoseDilithiumPublicKey(cose);
+        return importCoseMlDsaPublicKey(cose);
       default:
         throw new IllegalArgumentException("Unsupported key type: " + kty);
     }
   }
 
-  private static PublicKey importCoseDilithiumPublicKey(CBORObject cose)
+  private static PublicKey importCoseMlDsaPublicKey(CBORObject cose)
      throws NoSuchAlgorithmException, InvalidKeySpecException {
     final int algId = cose.get(CBORObject.FromObject(3)).AsInt32();
     byte[] rawKey = cose.get(CBORObject.FromObject(-1)).GetByteString();
-    DilithiumParameters params;
+    MLDSAParameters params;
     switch (algId) {
       case -87:
-        params = DilithiumParameters.dilithium2;
+        params = MLDSAParameters.ml_dsa_44;
 	break;
       case -88:
-        params = DilithiumParameters.dilithium3;
+        params = MLDSAParameters.ml_dsa_65;
 	break;
       case -89:
-        params = DilithiumParameters.dilithium5;
+        params = MLDSAParameters.ml_dsa_87;
 	break;
       default:
         throw new IllegalArgumentException("Unsupported algorithm id: " + algId);
     }
-    byte[] encoded = KeyUtil.getEncodedSubjectPublicKeyInfo(new DilithiumPublicKeyParameters(params, rawKey));
-    return KeyFactory.getInstance("DILITHIUM").generatePublic(new X509EncodedKeySpec(encoded));
+    byte[] encoded = KeyUtil.getEncodedSubjectPublicKeyInfo(new MLDSAPublicKeyParameters(params, rawKey));
+    return KeyFactory.getInstance("ML-DSA").generatePublic(new X509EncodedKeySpec(encoded));
   }
 
   private static PublicKey importCoseRsaPublicKey(CBORObject cose)
@@ -205,12 +205,12 @@ final class WebAuthnCodecs {
 
   static String getJavaAlgorithmName(COSEAlgorithmIdentifier alg) {
     switch (alg) {
-      case DILITHIUM2:
-        return "DILITHIUM2";
-      case DILITHIUM3:
-        return "DILITHIUM3";
-      case DILITHIUM5:
-        return "DILITHIUM5";
+      case MLDSA44:
+        return "ML-DSA-44";
+      case MLDSA65:
+        return "ML-DSA-65";
+      case MLDSA87:
+        return "ML-DSA-87";
       case EdDSA:
         return "EDDSA";
       case ES256:
